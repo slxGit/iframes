@@ -1,0 +1,11 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block">
+		 	<input type="text" id="{$item.name}" name="{$item.name}" value="{$item.value}" class="layui-input js-tags-input" {$item.attr|raw|default=''} autocomplete="off">
+		 	{notempty name="$item.tips"}
+		 		<div class="layui-word-aux">{$item.tips|raw}</div>
+		 	{/notempty}
+		</div>
+	</div>
+</div>

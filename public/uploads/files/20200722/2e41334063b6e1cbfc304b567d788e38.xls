@@ -1,0 +1,276 @@
+<html><head><meta charset='utf-8' /></head><body><table class="table table-hover">
+        <thead>
+        <!-- caption元素可以生成表标题，其单元格列跨度为表格的列数 -->
+        </thead><caption><h1>个人工资详情表</h1></caption>
+            <tbody><tr>
+                <th>工资号</th>
+                <th>员工编号</th>
+                <th>员工姓名</th>
+                <th>部门</th>
+                <th>职位</th>
+                <th>基本工资(元)</th>
+                <th>实发工资(元)</th>
+                <th>工资年份(年)</th>
+                <th>工资月份(月)</th>
+                <th>养老保险(元)</th>
+                <th>补贴(元)</th>
+                <th>医疗保险(元)</th>
+                <th>住房基金(元)</th>
+                <th>失业保险(元)</th>
+                <th>奖金(元)</th>
+                <th>罚金(元)</th>
+            </tr>
+        
+            </tbody><tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>1004</td>
+                    <td>王琳</td>
+                    <td>销售部</td>
+                     <td>员工        </td>
+                     <td>7000</td>
+                     <td>9100</td>
+                     <td>2018-01-01</td>
+                     <td>1</td>
+                     <td>500</td>
+                     <td>0</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>2100</td>
+                     <td>200</td>
+                </tr>
+
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>1005</td>
+                    <td>马六</td>
+                    <td>人事部</td>
+                     <td>主管        </td>
+                     <td>5500</td>
+                     <td>8000</td>
+                     <td>2018-02-01</td>
+                     <td>2</td>
+                     <td>500</td>
+                     <td>0</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>700</td>
+                     <td>200</td>
+                </tr>
+
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>1008</td>
+                    <td>隋磊</td>
+                    <td>销售部</td>
+                     <td>员工        </td>
+                     <td>5600</td>
+                     <td>8100</td>
+                     <td>2018-03-01</td>
+                     <td>3</td>
+                     <td>500</td>
+                     <td>0</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>700</td>
+                     <td>200</td>
+                </tr>
+
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>1013</td>
+                    <td>胖梨</td>
+                    <td>开发部</td>
+                     <td>经理        </td>
+                     <td>5700</td>
+                     <td>8200</td>
+                     <td>2018-04-01</td>
+                     <td>4</td>
+                     <td>500</td>
+                     <td>0</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>700</td>
+                     <td>200</td>
+                </tr>
+
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="row">6</th>
+                    <td>1014</td>
+                    <td>李彩霞</td>
+                    <td>开发部</td>
+                     <td>员工        </td>
+                     <td>5800</td>
+                     <td>8300</td>
+                     <td>2018-05-05</td>
+                     <td>5</td>
+                     <td>500</td>
+                     <td>0</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>700</td>
+                     <td>200</td>
+                </tr>
+
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="row">7</th>
+                    <td>1015</td>
+                    <td>赖昌星</td>
+                    <td>开发部</td>
+                     <td>员工        </td>
+                     <td>5900</td>
+                     <td>8400</td>
+                     <td>2018-06-06</td>
+                     <td>6</td>
+                     <td>500</td>
+                     <td>0</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>700</td>
+                     <td>200</td>
+                </tr>
+
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="row">9</th>
+                    <td>1016</td>
+                    <td>宋磊鑫</td>
+                    <td>销售部</td>
+                     <td>员工        </td>
+                     <td>6000</td>
+                     <td>8500</td>
+                     <td>2018-07-07</td>
+                     <td>7</td>
+                     <td>500</td>
+                     <td>0</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>700</td>
+                     <td>200</td>
+                </tr>
+
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="row">10</th>
+                    <td>1004</td>
+                    <td>王琳</td>
+                    <td>销售部</td>
+                     <td>员工        </td>
+                     <td>7000</td>
+                     <td>9100</td>
+                     <td>2018-08-08</td>
+                     <td>8</td>
+                     <td>500</td>
+                     <td>0</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>2100</td>
+                     <td>200</td>
+                </tr>
+
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="row">11</th>
+                    <td>1005</td>
+                    <td>马六</td>
+                    <td>人事部</td>
+                     <td>主管        </td>
+                     <td>5500</td>
+                     <td>8000</td>
+                     <td>2018-09-09</td>
+                     <td>9</td>
+                     <td>500</td>
+                     <td>0</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>700</td>
+                     <td>200</td>
+                </tr>
+
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="row">12</th>
+                    <td>1008</td>
+                    <td>隋磊</td>
+                    <td>销售部</td>
+                     <td>员工        </td>
+                     <td>5600</td>
+                     <td>8100</td>
+                     <td>2018-09-10</td>
+                     <td>10</td>
+                     <td>500</td>
+                     <td>0</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>700</td>
+                     <td>200</td>
+                </tr>
+
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="row">13</th>
+                    <td>1013</td>
+                    <td>胖梨</td>
+                    <td>开发部</td>
+                     <td>经理        </td>
+                     <td>5700</td>
+                     <td>8200</td>
+                     <td>2018-11-11</td>
+                     <td>11</td>
+                     <td>500</td>
+                     <td>0</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>700</td>
+                     <td>200</td>
+                </tr>
+
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="row">14</th>
+                    <td>1014</td>
+                    <td>李彩霞</td>
+                    <td>开发部</td>
+                     <td>员工        </td>
+                     <td>5800</td>
+                     <td>8300</td>
+                     <td>2018-12-01</td>
+                     <td>12</td>
+                     <td>500</td>
+                     <td>0</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>500</td>
+                     <td>700</td>
+                     <td>200</td>
+                </tr>
+
+            </tbody>
+    </table></body></html>

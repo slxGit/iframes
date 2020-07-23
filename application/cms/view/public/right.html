@@ -1,0 +1,41 @@
+<div class="layui-col-md4">
+  <dl class="fly-panel fly-list-one">
+    <dt class="fly-panel-title">阅读排行</dt>
+    {empty name="read_ranking"}
+      <div class="fly-none">暂无数据</div>
+    {else/}
+      {volist name="read_ranking" id="vo"}
+        <dd>
+          <a href="{:url('cms/article/detail',['id'=>$vo.id])}">{$vo.title}</a>
+          <span style="float: right;"><i class="iconfont icon-liulanyanjing"></i> {$vo.clicks}</span>
+        </dd>
+      {/volist}
+    {/empty}
+  </dl>
+
+  <dl class="fly-panel fly-list-one">
+    <dt class="fly-panel-title">最新文章</dt>
+    {empty name="latest_articles"}
+      <div class="fly-none">暂无数据</div>
+    {else/}
+      {volist name="latest_articles" id="vo"}
+        <dd>
+          <a href="{:url('cms/article/detail',['id'=>$vo.id])}">{$vo.title}</a>
+          <span style="float: right;"><i class="iconfont icon-liulanyanjing"></i> {$vo.clicks}</span>
+        </dd>
+      {/volist}
+    {/empty}
+  </dl>
+  {include file="../application/adv/view/public/adv_cms_right.html"/}
+
+
+  <div class="fly-panel fly-link">
+    <h3 class="fly-panel-title">友情链接</h3>
+    <dl class="fly-panel-main">
+      {volist name="link_list" id="link"}
+      <dd><a href="{$link.url}" target="{$link.target}">{$link.title}</a><dd>
+      {/volist}
+    </dl>
+  </div>
+
+</div>

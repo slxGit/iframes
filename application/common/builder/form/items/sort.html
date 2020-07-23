@@ -1,0 +1,26 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block">
+		 	<input type="hidden" name="{$item.name}" value="{$item.value|array_keys|implode=',', ###}">
+		 	{notempty name="item.value"}
+			    <div class="dd js-nestable" data-name="{$item.name}">
+			        <ol class="dd-list">
+			        	{volist name="item.value" id="value"}
+				            <li class="dd-item" data-id="{$key}">
+				                <div class="dd-handle nestable-content">{$value}</div>
+				            </li>
+			            {/volist}
+			        </ol>
+			    </div>
+			{else/}
+				<div class="empty">
+					暂无数据，无法排序
+				</div>
+		    {/notempty}
+		 	{notempty name="$item.tips"}
+		 		<div class="layui-word-aux">{$item.tips|raw}</div>
+		 	{/notempty}
+		</div>
+	</div>
+</div>

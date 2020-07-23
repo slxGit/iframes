@@ -1,0 +1,12 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block rate-block">
+			<div id="rate_{$item.name}" class="rate"></div>
+		 	<input type="hidden" id="{$item.name}" name="{$item.name}" value="{$item.value}" data-configs="{$item.configs}" class="js-rate" autocomplete="off">
+		 	{notempty name="$item.tips"}
+		 		<div class="layui-word-aux">{$item.tips|raw}</div>
+		 	{/notempty}
+		</div>
+	</div>
+</div>

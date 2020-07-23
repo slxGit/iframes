@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>菜单列表</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="__LAYUIADMIN__/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="__LAYUIADMIN__/style/admin.css" media="all">
+  <style type="text/css">
+    .tree {
+      margin-top: 10px;
+    }
+    .layui-tree-entry {
+      height: 28px;
+    }
+    .layui-tree-txt {
+      font-size: 15px;
+    }
+    .layui-tree-btnGroup .layui-icon {
+      font-size: 18px;
+      padding: 0 5px;
+    }
+    .layui-icon {
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="layui-card-body">
+            <a href="{:url('system/Menu/add')}" class="layui-btn">添加菜单</a>
+            <div class="tree" id="menu_list" data-menus="{$trees}"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="__LAYUIADMIN__/layui/layui.js"></script>  
+  <script>
+    layui.use('tree', function(){
+      var $ = layui.$,
+        tree = layui.tree,
+        admin = layui.admin,
+        menu = $('#menu_list');
+
+      tree.render({
+        elem: menu,
+        data: menu.data('menus'),
+        edit: ['add', 'update', 'del'],
+        customOperate: true,
+        operate: function(obj){
+          var type = obj.type,
+            data = obj.data,
+            elem = obj.elem,
+            id = data.id;
+          if(type === 'add'){
+            window.location = "/system/Menu/add/id/" + id
+          } else if(type === 'update'){
+            window.location = "/system/Menu/edit/id/" + id
+          } else if(type === 'del'){
+            layer.confirm('确认删除 <b>' + data.name + '</b> 吗？', function(index) {
+              layer.close(index);
+              var loading = layer.msg('<i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i> 正在删除...', {
+                shade: 0.1, 
+                time: 0
+              });
+              $.ajax({
+                url: "{:url('system/Menu/delete')}",
+                type: 'post',
+                data: {
+                  id: data.id
+                },
+                complete: function(XMLHttpRequest, textStatus) {
+                  layer.close(loading);
+                },
+                success: function(res) {
+                  if (res.code == 1) {
+                    elem.remove();
+                    layer.msg(res.msg, {icon: 1});
+                  } else {
+                    layer.msg(res.msg, {icon: 2});
+                  }
+                },
+                error: function () {
+                  layer.msg('数据异常，操作失败！');
+                }
+              });
+            });
+          };
+        }
+      });
+    });
+  </script>
+</body>
+</html>

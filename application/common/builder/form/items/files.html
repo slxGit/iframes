@@ -1,0 +1,29 @@
+<div class="{$item.grid|default=''}">
+    <div class="layui-form-item" id="form_item_{$item.name}">
+    	<label class="layui-form-label">{$item.title}</label>
+    	<div class="layui-input-block">
+    		<button type="button" class="layui-btn layui-btn-primary upload-file" id="picker_{$item.name}">{$item.placeholder|default='上传文件'}</button>
+    	 	{notempty name="$item.tips"}
+    	 		<div class="layui-word-aux">{$item.tips|raw}</div>
+    	 	{/notempty}
+            <ul class="layui-upload-list" id="upload_list_{$item.name}">
+                {notempty name="item.value"}
+                    {volist name="$item.value|explode=',',###" id="vo"}
+                        {php} 
+                            $file_name = get_file_name($vo);
+                            $file_path = get_file_path($vo);
+                        {/php}
+                        <li class="file-item">
+                        	<i class="layui-icon layui-icon-file"></i> {$file_name|default='找不到文件'} 
+                            {notempty name="file_path"}
+                            [<a href="{$file_path}" download="{$file_name}" class="download-file">下载</a>]
+                            {/notempty}
+                            [<a href="javascript:void(0);" class="remove-file" data-value="{$vo}">删除</a>]
+                        </li>
+                    {/volist}
+                {/notempty}
+            </ul>
+          	<input type="hidden" class="js-upload-files" id="{$item.name}" name="{$item.name}" data-multiple="true" data-size="{$item.size|default=0}" data-exts='{$item.exts|default=""}' value="{$item.value|default=''}" data-url="{$item.url|default=url('system/annex/upload',['dir'=>'files'])}" autocomplete="off">
+    	</div>
+    </div>
+</div>

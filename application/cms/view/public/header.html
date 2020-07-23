@@ -1,0 +1,85 @@
+<div class="fly-header layui-bg-black">
+	<div class="layui-container">
+		<a class="fly-logo" href="{:url('cms/category/index')}">
+			<img src="{:get_file_path(config('web_site_logo'))}" alt="layui" style="width: 120px;height: 40px;">
+		</a>
+		<ul class="layui-nav fly-nav layui-hide-xs">
+			<li class="layui-nav-item layui-this">
+				<a href="/"><i class="iconfont icon-biaoqing1"></i>CMS模块</a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="{:url('portal/entry/form')}" target="_blank"><i class="iconfont icon-shichang"></i>表单构建器</a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="{:url('portal/entry/table')}" target="_blank"><i class="iconfont icon-jiacu"></i>表格构建器</a>
+			</li>
+		</ul>
+
+		<ul class="layui-nav fly-nav-user">
+			{if session('user_id', '', 'member')}
+				<!-- 登入后的状态 -->
+				<li class="layui-nav-item">
+					<a class="fly-nav-avatar" href="javascript:;">
+						<cite class="layui-hide-xs">{:session('user_name', '', 'member')}</cite>
+						<img src="{:empty(session('user_avatar', '', 'member')) ? '/static/admin/img/avatar.png' : session('user_avatar', '', 'member')}">
+					</a>
+	        <dl class="layui-nav-child">
+	          <dd><a href="{:url('member/access/logout')}" style="text-align: center;">退出</a></dd>
+	        </dl>
+				</li>
+			{else/}
+				<!-- 未登入的状态 -->
+				<li class="layui-nav-item">
+					<a class="iconfont icon-touxiang layui-hide-xs" href="{:url('member/access/login')}"></a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="{:url('member/access/login')}">登录</a>
+				</li>
+			{/if}
+		</ul>
+	</div>
+</div>
+
+<div class="fly-panel fly-column">
+	<div class="layui-container" id="main_nav">
+		<ul class="layui-clear">
+			{notempty name="main_nav"}
+				{volist name="main_nav" id="menu"} 
+					<li><a href="{$menu.url}" target="{$menu.target}">{$menu.title}</a></li> 
+				{/volist}
+			{/notempty}
+		</ul> 
+	</div>
+</div>
+
+<script type="text/javascript">
+  layui.cache.page = '';
+  layui.cache.user = {
+    uid: -1
+  };
+  layui.config({
+    version: "3.0.0"
+    ,base: '/static/cms/mods/'
+  }).extend({
+    fly: 'index'
+  }).use('fly');
+</script>
+
+<!-- 选中的导航高亮显示 -->
+<script src="/static/builder/common/jquery.min.js"></script>
+<script type="text/javascript" language="javascript">
+	var nav = document.getElementById("main_nav");
+	var links = nav.getElementsByTagName("li");
+	var lilen = nav.getElementsByTagName("a");
+	var currenturl = document.location.href;
+	var last = '';
+	for (var i=0;i<links.length;i++){
+		var linkurl =  lilen[i].getAttribute("href");
+		if(currenturl.indexOf(linkurl)!=-1){
+			last = i;
+		}
+	}
+	if (last !== '') {
+		links[last].className = "layui-this";
+	}
+</script>

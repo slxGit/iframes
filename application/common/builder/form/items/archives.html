@@ -1,0 +1,30 @@
+<div class="{$item.grid|default=''}">
+    <div class="layui-form-item" id="form_item_{$item.name}">
+    	<label class="layui-form-label">{$item.title}</label>
+    	<div class="layui-input-block">
+            {notempty name="item.value"}
+            <ul class="layui-upload-list">
+                {notempty name="item.value"}
+                    {volist name="$item.value|explode=',',###" id="vo"}
+                        {php} 
+                            $file_name = get_file_name($vo);
+                            $file_path = get_file_path($vo);
+                        {/php}
+                        <li class="file-item">
+                        	<i class="layui-icon layui-icon-file"></i> {$file_name|default='找不到文件'} 
+                            {notempty name="file_path"}
+                            [<a href="{$file_path}" download="{$file_name}" class="download-file">下载</a>] 
+                            {/notempty}
+                        </li>
+                    {/volist}
+                {/notempty}
+            </ul>
+            {else/}
+            <div class="empty">暂无数据</div>
+            {/notempty}
+    	</div>
+    </div>
+    {notempty name="$item.tips"}
+        <div class="word-aux">{$item.tips|raw}</div>
+    {/notempty}
+</div>

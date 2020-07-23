@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>菜单列表</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="__LAYUIADMIN__/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="__LAYUIADMIN__/style/admin.css" media="all">
+  <style type="text/css">
+    .tree {
+      margin-top: 10px;
+    }
+    .layui-tree-entry {
+      height: 28px;
+    }
+    .layui-tree-txt {
+      font-size: 15px;
+    }
+    .layui-tree-btnGroup .layui-icon {
+      font-size: 18px;
+      padding: 0 5px;
+    }
+    .layui-icon {
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="layui-card-body">
+            <div class="layui-card-header">权限设置</div>
+            <div class="tree" id="menu_list" data-menus="{$trees}"></div>
+            <div class="layui-form-item layui-layout-admin">
+              <div class="layui-input-block">
+                <div class="layui-footer" style="left: 0;">
+                    <button type="button" class="layui-btn" lay-event="submit">提交</button>
+                    <button type="button" class="layui-btn" onclick="javascript:history.back(-1);return false;">返回</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="__LAYUIADMIN__/layui/layui.js"></script>  
+  <script>
+    layui.use(['tree','util'], function(){
+      var $ = layui.$,
+        tree = layui.tree,
+        admin = layui.admin,
+        util = layui.util,
+        menu = $('#menu_list');
+
+      tree.render({
+        elem: menu,
+        data: menu.data('menus'),
+        id: 'authorize_id',
+        showCheckbox: true
+      });
+
+      util.event('lay-event', {
+        submit: function(othis){
+          var getCheckedId = function (data) {
+            if (data.length > 0) {
+              for (let i = 0; i < data.length; i++) {
+                if (checked_ids == '') {
+                  checked_ids = data[i].id;
+                } else {
+                  checked_ids += ',' + data[i].id;
+                }
+                if (data[i].children) {
+                  getCheckedId(data[i].children);
+                }
+              }
+            }
+          };
+          // 获取选中节点的数据
+          var checkedData = tree.getChecked('authorize_id');
+          var checked_ids = '';
+          getCheckedId(checkedData);
+          layer.msg('<i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i> 请稍等...', {
+            shade: 0.1, 
+            time: 0
+          });
+          $.ajax({
+            type:'POST',
+            url: "{:url('system/Role/authorize')}",
+            data: {
+              'id' : "{$id}",
+              'menu_ids': checked_ids
+            },
+            success:function (res) {
+              layer.closeAll();
+              if(res.code == 1){
+                layer.msg(res.msg, {icon: 1})
+                setTimeout(function (){
+                  location.href = res.url;
+                }, 2000);
+              }else{
+                layer.msg(res.msg, {icon: 2});
+              }
+            }
+          })
+        }
+      });
+    });
+  </script>
+</body>
+</html>

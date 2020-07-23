@@ -1,0 +1,8 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<table class="layui-hide js-table" id="table_{$item.name}" lay-filter="table_{$item.name}" data-cols="{$item.cols}" data-value="{$item.value}" data-configs="{$item.configs}"></table>
+	 	{notempty name="$item.tips"}
+	 		<div class="layui-word-aux">{$item.tips|raw}</div>
+	 	{/notempty}
+	</div>
+</div>

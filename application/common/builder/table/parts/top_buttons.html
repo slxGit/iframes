@@ -1,0 +1,9 @@
+{notempty name="top_buttons"}
+  <script type="text/html" id="toolbar-top-buttons">
+    <div class="layui-btn-container">
+      {volist name="top_buttons" id="button"}
+        <button class="{$button.class|default=''}" data-url="{$button.url|default=''}" data-method="{$button.method|default='href'}" data-confirm="{$button.confirm|default=''}" data-param="{$button.param|default='[]'}" data-complete="{$button.complete|default=''}" data-open-title="{$button.open_title|default=''}" lay-event="toolbar-top-button">{$button.title}</button>
+      {/volist}
+    </div>  
+  </script>
+{/notempty}

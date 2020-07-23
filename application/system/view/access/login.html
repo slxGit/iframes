@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{:config('web_site_title')} 后台登录</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="__LAYUIADMIN__/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="__LAYUIADMIN__/style/admin.css" media="all">
+  <link rel="stylesheet" href="__LAYUIADMIN__/style/login.css" media="all">
+</head>
+<body>
+
+  <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+    <div class="layadmin-user-login-main">
+      <div class="layadmin-user-login-box layadmin-user-login-header">
+        <h2>{:config('web_site_title')}</h2>
+        <p>后台管理系统</p>
+      </div>
+      <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+        <div class="layui-form-item">
+          <label class="layadmin-user-login-icon layui-icon layui-icon-username"></label>
+          <input type="text" name="username" lay-verify="required" placeholder="用户名" class="layui-input" autocomplete="off">
+        </div>
+        <div class="layui-form-item">
+          <label class="layadmin-user-login-icon layui-icon layui-icon-password"></label>
+          <input type="password" name="password" lay-verify="required" placeholder="密码" class="layui-input" autocomplete="off">
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <div class="layui-col-xs7">
+                    <label class="layadmin-user-login-icon layui-icon layui-icon-vercode"></label>
+                    <input type="text" name="vercode"lay-verify="required" placeholder="图形验证码" class="layui-input">
+                </div>
+                <div class="layui-col-xs5">
+                    <div style="margin-left: 10px;">
+                        <img src="{:captcha_src()}" alt="captcha" class="layadmin-user-login-codeimg" id="verify_img" onclick="refreshVerify()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+          <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="admin-login-submit" id="login">登 录</button>
+        </div>
+      </div>
+    </div>
+    <div class="layui-trans layadmin-user-login-footer">
+      <p>{:config('web_site_copyright')}</p>
+    </div>
+  </div>
+
+  <script src="__LAYUIADMIN__/layui/layui.js"></script>  
+  <script>
+    // 刷新验证码
+    function refreshVerify() {
+        var ts = Date.parse(new Date())/1000;
+        var captcha = document.getElementById('verify_img');
+        captcha.src = "{:captcha_src()}?rand="+ts;
+    }
+
+    layui.config({
+      base: '__LAYUIADMIN__/' //静态资源所在路径
+    }).extend({
+      index: 'lib/index' //主入口模块
+    }).use(['form'], function(){
+      var $ = layui.$,
+        form = layui.form;
+      form.render();
+      //提交
+      form.on('submit(admin-login-submit)', function(data){
+        layer.msg('<i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i> 正在登录...', {
+          shade: 0.1, 
+          time: 0
+        });
+        $.ajax({
+          type: 'POST',
+          url: "{:url('system/Access/doLogin')}",
+          data: data.field,
+          success: function(res){
+            layer.closeAll();
+            if(res.code == 1){
+              location.href = res.url;
+            }else{
+              layer.msg(res.msg, {icon: 2});
+              refreshVerify();
+            }
+          },
+          error: function () {
+            error('数据异常，操作失败！');
+          }
+        });
+      });
+
+      $(document).on("keydown",function (event) {
+        var e = event || window.event ||arguments.callee.caller.arguments[0];
+        if(e && e.keyCode==13){
+          $("#login").trigger("click");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

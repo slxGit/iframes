@@ -1,0 +1,35 @@
+{notempty name="right_buttons"}
+<script type="text/html" id="toolbar-right-buttons"> 
+  {{#  
+    var replace_buttons = {$replace_right_buttons|raw|json_encode=###,JSON_UNESCAPED_UNICODE};
+    var replace_content = '';
+    for(let k in replace_buttons){
+      var condition = replace_buttons[k].condition;
+      var content = replace_buttons[k].content;
+      var replace = false;
+      if (condition) {
+        replace = true;
+        for(let key in condition){
+          if(condition[key].indexOf(d[key]) == -1) {
+            replace = false;
+            break;
+          }
+        }
+      }
+      if (replace === true) {
+        replace_content = content;
+        break;
+      }
+    }
+  }}
+  {{#  if(replace && typeof(replace_content)=='string') {
+    return replace_content;
+  } else { }}
+    {volist name="right_buttons" id="button"}
+      {{#  if(!replace || replace_content.indexOf('{$button.type}') != -1) { }}
+        <button class="{$button.class|default=''}" data-url="{$button.url|default=''}" data-method="{$button.method|default='href'}" data-confirm="{$button.confirm|default=''}" data-param="{$button.param|default='[]'}" data-complete="{$button.complete|default=''}" data-open-title="{$button.open_title|default=''}" lay-event="toolbar-right-button">{$button.title}</button>
+      {{#  } }}
+    {/volist}
+  {{#  } }}
+</script>
+{/notempty}

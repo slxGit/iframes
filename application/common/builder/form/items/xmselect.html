@@ -1,0 +1,11 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+	    <label class="layui-form-label">{$item.title}</label>
+	    <div class="layui-input-block">
+	        <div id="{$item.name}" name="{$item.name}" class="js-xm-select" data-options="{$item.options}" data-value="{$item.value}" data-placeholder="{$item.placeholder|default='请选择'.$item.title}" data-configs="{$item.configs}"></div>
+	        {notempty name="item.tips"}
+	            <div class="layui-word-aux">{$item.tips|raw}</div>
+	        {/notempty}
+	    </div>
+	</div>
+</div>

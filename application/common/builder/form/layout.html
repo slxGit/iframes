@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{$page_title|default=''}</title>
+  <!-- 需要加载的css -->
+  {volist name="css_files" id="css"}
+    <link rel="stylesheet" href="{$css}">
+  {/volist}
+  <link rel="stylesheet" href="/static/layuiadmin/layui/css/layui.css">
+  <link rel="stylesheet" href="/static/layuiadmin/style/admin.css">
+  <link rel="stylesheet" href="/static/builder/common/form.css">
+  <!-- 需要引入的css -->
+  {volist name="css_list" id="css"}
+    <link rel="stylesheet" href="{$css}">
+  {/volist}
+  <!-- 需要引入的css代码 -->
+  {$css_code|raw|default=''}
+  <script>
+    // 常量
+    var constant = {
+      'triggers': {:json_encode(isset($field_triggers) ? $field_triggers : [])},
+      'field_hide': {:json_encode(isset($field_hide) ? $field_hide : [])},
+      'submit_url': '{$submit_url ? $submit_url : request()->url(true)}',
+      'submit_method': '{$submit_method ? $submit_method : "post"}',
+      'submit_confirm': '{$submit_confirm ? $submit_confirm : false}',
+      'submit_ajax': '{$submit_ajax ? $submit_ajax : false}',
+      'get_level_data': '{:url("system/ajax/getleveldata")}',
+      'layedit_upload_url': '{:url("system/annex/layedit")}',
+      'ueditor_upload_url': '{:url("system/annex/ueditor")}'
+    };
+  </script>
+</head>
+
+<body>
+  <div class="layui-fluid">
+    <div class="layui-card">
+      <!-- 页面标题 -->
+      {notempty name="$page_title"}
+        <div class="layui-card-header">{$page_title}</div>
+      {/notempty}
+      <!-- tab按钮 -->
+      {notempty name="$tab_nav"}
+        <div class="layui-tab layui-tab-brief">
+          <ul class="layui-tab-title">
+            {volist name="$tab_nav.tab_list" id="tab"}
+            <li {eq name="$tab_nav.curr_tab" value="$key"}class="layui-this"{/eq}>
+              <a href="{$tab.url}">{$tab.title}</a>
+            </li>
+            {/volist}
+          </ul>
+        </div>
+      {/notempty}
+
+      <div class="layui-card-body" style="padding: 15px;">
+        <!-- 表单项 -->
+        <form class="layui-form" lay-filter="layout-form" id="layout-form">
+          {volist name="form_items" id="item"}
+            {switch name="item.type"}
+              {case value="group"}
+                <!-- 分组 -->
+                {include file="../application/common/builder/form/items/group.html"/}
+              {/case}
+              {case value="hidden"}
+                <!-- 隐藏文本 -->
+                {include file="../application/common/builder/form/items/hidden.html"/}
+              {/case}
+              {case value="static"}
+                <!-- 静态文本 -->
+                {include file="../application/common/builder/form/items/static.html"/}
+              {/case}
+              {case value="text"}
+                <!-- 单行文本 -->
+                {include file="../application/common/builder/form/items/text.html"/}
+              {/case}
+              {case value="number"}
+                <!-- 数字输入框 -->
+                {include file="../application/common/builder/form/items/number.html"/}
+              {/case}
+              {case value="range"}
+                <!-- 范围 -->
+                {include file="../application/common/builder/form/items/range.html"/}
+              {/case}
+              {case value="rate"}
+                <!-- 评分 -->
+                {include file="../application/common/builder/form/items/rate.html"/}
+              {/case}
+              {case value="icon"}
+                <!-- 图标选择器 -->
+                {include file="../application/common/builder/form/items/icon.html"/}
+              {/case}
+              {case value="colorpicker"}
+                <!-- 颜色选择器 -->
+                {include file="../application/common/builder/form/items/colorpicker.html"/}
+              {/case}
+              {case value="sort"}
+                <!-- 拖拽排序 -->
+                {include file="../application/common/builder/form/items/sort.html"/}
+              {/case}
+              {case value="password"}
+                <!-- 密码框 -->
+                {include file="../application/common/builder/form/items/password.html"/}
+              {/case}
+              {case value="transfer"}
+                <!-- 穿梭框 -->
+                {include file="../application/common/builder/form/items/transfer.html"/}
+              {/case}
+              {case value="xmselect"}
+                <!-- xm-select -->
+                {include file="../application/common/builder/form/items/xmselect.html"/}
+              {/case}
+              {case value="select"}
+                <!-- 下拉菜单 -->
+                {include file="../application/common/builder/form/items/select.html"/}
+              {/case}
+              {case value="linkage"}
+                <!-- 普通联动下拉菜单 -->
+                {include file="../application/common/builder/form/items/linkage.html"/}
+              {/case}
+              {case value="linkages"}
+                <!-- 快速联动下拉菜单 -->
+                {include file="../application/common/builder/form/items/linkages.html"/}
+              {/case} 
+              {case value="switch"}
+                <!-- 开关 -->
+                {include file="../application/common/builder/form/items/switch.html"/}
+              {/case}
+              {case value="radio"}
+                <!-- 单选框 -->
+                {include file="../application/common/builder/form/items/radio.html"/}
+              {/case}
+              {case value="checkbox"}
+                <!-- 复选框 -->
+                {include file="../application/common/builder/form/items/checkbox.html"/}
+              {/case}
+              {case value="textarea|array"}
+                <!-- 文本域||数组 -->
+                {include file="../application/common/builder/form/items/textarea.html"/}
+              {/case}
+              {case value="ueditor"}
+                <!-- 百度编辑器 -->
+                {include file="../application/common/builder/form/items/ueditor.html"/}
+              {/case}
+              {case value="layedit"}
+                <!-- layui编辑器 -->
+                {include file="../application/common/builder/form/items/layedit.html"/}
+              {/case}
+              {case value="tags"}
+                <!-- 标签 -->
+                {include file="../application/common/builder/form/items/tags.html"/}
+              {/case}
+              {case value="file"}
+                <!-- 单文件上传 -->
+                {include file="../application/common/builder/form/items/file.html"/}
+              {/case}
+              {case value="files"}
+                <!-- 多文件上传 -->
+                {include file="../application/common/builder/form/items/files.html"/}
+              {/case}
+              {case value="archive"}
+                <!-- 单文件展示 -->
+                {include file="../application/common/builder/form/items/archive.html"/}
+              {/case}
+              {case value="archives"}
+                <!-- 多文件展示 -->
+                {include file="../application/common/builder/form/items/archives.html"/}
+              {/case}
+              {case value="image"}
+                <!-- 单图上传 -->
+                {include file="../application/common/builder/form/items/image.html"/}
+              {/case}
+              {case value="images"}
+                <!-- 多图上传 -->
+                {include file="../application/common/builder/form/items/images.html"/}
+              {/case}
+              {case value="plan"}
+                <!-- 单图展示 -->
+                {include file="../application/common/builder/form/items/plan.html"/}
+              {/case}
+              {case value="plans"}
+                <!-- 多图展示 -->
+                {include file="../application/common/builder/form/items/plans.html"/}
+              {/case}
+              {case value="date"}
+                <!-- 日期 -->
+                {include file="../application/common/builder/form/items/date.html"/}
+              {/case}
+              {case value="bmap"}
+                <!-- 百度地图 -->
+                {include file="../application/common/builder/form/items/bmap.html"/}
+              {/case}
+              {case value="table"}
+                <!-- 表格 -->
+                {include file="../application/common/builder/form/items/table.html"/}
+              {/case}
+              {case value="datatable"}
+                <!-- 数据表格 -->
+                {include file="../application/common/builder/form/items/datatable.html"/}
+              {/case}
+              {case value="button"}
+                <!-- 按钮 -->
+                {include file="../application/common/builder/form/items/button.html"/}
+              {/case}
+            {/switch}
+          {/volist}
+    
+          <div class="layui-form-item layui-layout-admin">
+            {if !(in_array('submit', $btn_del) && in_array('back', $btn_del))}
+            <div class="layui-input-block">
+              <div class="layui-footer" style="left: 0;">
+                <!-- 提交按钮 -->
+                {if !in_array('submit', $btn_del)}
+                  <button type="button" class="layui-btn" lay-submit="" lay-filter="layout-form-submit" id="form-submit">{$btn_title['submit']|raw|default='提交'}</button>
+                {/if}
+                <!-- 返回按钮 -->
+                {if !in_array('back', $btn_del)}
+                  <button type="button" class="layui-btn" onclick="javascript:history.back(-1);return false;">{$btn_title['back']|raw|default='返回'}</button>
+                {/if}
+                <!-- 额外按钮 -->
+                {$btn_extra|raw|default=''}
+              </div>
+            </div>
+            {/if}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/builder/common/jquery.min.js"></script>
+  <script src="/static/layuiadmin/layui/layui.js"></script>
+  <script src="/static/builder/common/form.js"></script>
+
+  <!-- 需要加载的js -->
+  {volist name="js_files" id="js"}
+    <script src="{$js}"></script>
+  {/volist}
+  <!-- 需要引入的js -->
+  {volist name="js_list" id="js"}
+    <script src="{$js}"></script>
+  {/volist}
+  <!-- 需要引入的js代码 -->
+  {$js_code|raw|default=''}
+</body>
+</html>

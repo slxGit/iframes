@@ -1,0 +1,15 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<div>
+			<table class="layui-hide js-data-table" id="data_table_{$item.name}" lay-filter="data_table_{$item.name}" data-cols="{$item.cols}" data-value="{$item.value}"></table>
+			<button type="button" class="layui-btn layui-btn-normal layui-btn-sm add-row" data-table-id="data_table_{$item.name}">新增一行</button>
+		 	{notempty name="$item.tips"}
+		 		<div class="layui-word-aux">{$item.tips|raw}</div>
+		 	{/notempty}
+		</div>
+	</div>
+</div>
+
+<script type="text/html" id="data-table-right-buttons">
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>

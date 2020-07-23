@@ -1,0 +1,10 @@
+<div class="fly-footer">
+  <p><a href="javascript:void(0)">CMS演示</a> 2020 &copy; <a href="javascript:void(0)">KirinBDF</a></p>
+  {notempty name="footer_nav"}
+  <p>
+  	{volist name="footer_nav" id="menu"}
+    	<a href="{$menu.url}" target="{$menu.target}">{$menu.title}</a>
+  	{/volist}
+  </p>
+  {/notempty}
+</div>

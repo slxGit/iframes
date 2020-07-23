@@ -1,0 +1,57 @@
+<div class="{$item.grid|default=''}">
+    <div class="layui-form-item" id="form_item_{$item.name}">
+        <label class="layui-form-label">{$item.title}</label>
+        <div class="layui-input-block">
+            <div class="layui-inline">
+                <select class="js-select-linkages" {if !$item.last_value}name="{$item.name}[]"{/if} lay-filter="{$item.name}_1" id="{$item.name}_1" data-token="{$item.token}" data-pid-field="{$item.pid_field}" data-next-level-id="{$item.name}_2" autocomplete="off">
+                    <option value="">请选择</option>
+                    {volist name="$item.level_one" id="option"}
+                        <option value="{$key}" {if (isset($item.level_key.0) && $item.level_key.0 == (string)$key)}selected{/if}>{$option|raw}</option>
+                    {/volist}
+                </select>
+            </div>
+
+            <!-- 2级联动 -->
+            {eq name="$item.level" value="2"}
+            <div class="layui-inline">
+                <select id="{$item.name}_2" {if !$item.last_value}name="{$item.name}[]"{else/}name="{$item.name}"{/if} autocomplete="off">
+                    <option value="">请选择</option>
+                    {notempty name="$item.level_data.1"}
+                        {volist name="$item.level_data.1" id="option"}
+                            <option value="{$key}" {if (isset($item.level_key.1) && $item.level_key.1 == (string)$key)}selected{/if}>{$option|raw}</option>
+                        {/volist}
+                    {/notempty}
+                </select>
+            </div>
+            {/eq}
+
+            <!-- 3级联动 -->
+            {eq name="$item.level" value="3"}
+            <div class="layui-inline">
+                <select class="js-select-linkages" {if !$item.last_value}name="{$item.name}[]"{/if} lay-filter="{$item.name}_2" id="{$item.name}_2" data-token="{$item.token}" data-pid-field="{$item.pid_field}" data-next-level-id="{$item.name}_3" autocomplete="off">
+                    <option value="">请选择</option>
+                    {notempty name="$item.level_data.1"}
+                        {volist name="$item.level_data.1" id="option"}
+                            <option value="{$key}" {if (isset($item.level_key.1) && $item.level_key.1 == (string)$key)}selected{/if}>{$option|raw}</option>
+                        {/volist}
+                    {/notempty}
+                </select>
+            </div>
+            <div class="layui-inline">
+                <select id="{$item.name}_3" {if !$item.last_value}name="{$item.name}[]"{else/}name="{$item.name}"{/if} autocomplete="off">
+                    <option value="">请选择</option>
+                    {notempty name="$item.level_data.2"}
+                        {volist name="$item.level_data.2" id="option"}
+                            <option value="{$key}" {if (isset($item.level_key.2) && $item.level_key.2 == (string)$key)}selected{/if}>{$option|raw}</option>
+                        {/volist}
+                    {/notempty}
+                </select>
+            </div>
+            {/eq}
+
+            {notempty name="item.tips"}
+                <div class="layui-word-aux">{$item.tips|raw}</div>
+            {/notempty}
+        </div>
+    </div>
+</div>

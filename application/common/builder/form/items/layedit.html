@@ -1,0 +1,11 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item layui-form-text" id="form_item_{$item.name}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block">
+			<textarea id="{$item.name}" name="{$item.name}" class="js-layedit" data-configs="{$item.configs|default='[]'}" style="display: none;">{$item.value|raw}</textarea>
+		 	{notempty name="$item.tips"}
+		 		<div class="layui-word-aux">{$item.tips|raw}</div>
+		 	{/notempty}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block">
+			<input type="checkbox" id="{$item.name}" name="{$item.name}" value="1" lay-skin="switch" lay-text="{$item.text}" {notempty name="item.value"}checked{/notempty} {$item.attr|raw|default=''} autocomplete="off">
+            {notempty name="item.tips"}
+                <div class="layui-word-aux">{$item.tips|raw}</div>
+            {/notempty}
+		</div>
+	</div>
+</div>

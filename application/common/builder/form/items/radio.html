@@ -1,0 +1,13 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block">
+			{volist name="item.options" id="option"}
+	  			<input type="radio" id="{$item.name}[{$key}]" name="{$item.name}" value="{$key}" title="{$option}" {php}$key = (string)$key;{/php} {eq name="key" value="$item.value|default=''"}checked{/eq} {$item.attr|raw|default=''} lay-verify="{$item.verify|default=''}" autocomplete="off">
+	  		{/volist}
+			{notempty name="$item.tips"}
+				<div class="layui-word-aux">{$item.tips|raw}</div>
+			{/notempty}
+		</div>
+	</div>
+</div>

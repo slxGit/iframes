@@ -1,0 +1,71 @@
+{notempty name="search_items"}
+<form class="layui-form layui-form-pane search-area" action="{$search_url}">
+  <div class="layui-row layui-col-space12">
+    {volist name="search_items" id="item"}
+      {switch name="item.type"}
+        {case value="text"}
+        <div class="layui-col-md{$item.md}">
+          {notempty name="$item.title"}
+            <label class="layui-form-label" title="{$item.title}">{$item.title}</label>
+            <div class="layui-input-block">
+              <input class="layui-input" name="{$item.name}" placeholder="{$item.placeholder}" autocomplete="off" value="{:request()->param($item.name)}">
+            </div>
+          {else/}
+            <input class="layui-input" name="{$item.name}" placeholder="{$item.placeholder}" autocomplete="off" value="{:request()->param($item.name)}">
+          {/notempty}
+        </div>
+        {/case}
+        {case value="select"}
+          <div class="layui-col-md{$item.md}">
+          {notempty name="$item.title"}
+            <label class="layui-form-label" title="{$item.title}">{$item.title}</label>
+            <div class="layui-input-block">
+              <select name="{$item.name}" lay-search="true" autocomplete="off">
+                <option value="">{$item.placeholder}</option>
+                {volist name="item.options" id="option"}
+                  <option value="{$key}" {if (string)request()->param($item.name) === (string)$key}selected{/if}>{$option}</option>
+                {/volist}
+              </select>
+            </div>
+          {else/}
+            <select name="{$item.name}" lay-search="true" autocomplete="off">
+              <option value="">{$item.placeholder}</option>
+              {volist name="item.options" id="option"}
+                <option value="{$key}" {if (string)request()->param($item.name) === (string)$key}selected{/if}>{$option}</option>
+              {/volist}
+            </select>
+          {/notempty}
+          </div>
+        {/case}
+        {case value="xmselect"}
+          <div class="layui-col-md{$item.md}">
+          {notempty name="$item.title"}
+            <label class="layui-form-label" title="{$item.title}">{$item.title}</label>
+            <div class="layui-input-block">
+              <div id="search_items_{$item.name}" class="js-search-xm-select" data-options="{$item.options}" data-configs="{$item.configs}" name="{$item.name}" data-placeholder="{$item.placeholder}" value="{:request()->param($item.name)}"></div>
+            </div>
+          {else/}
+            <div id="search_items_{$item.name}" class="js-search-xm-select" data-options="{$item.options}" data-configs="{$item.configs}" name="{$item.name}" data-placeholder="{$item.placeholder}" value="{:request()->param($item.name)}"></div>
+          {/notempty}
+          </div>
+        {/case}
+        {case value="date"}
+          <div class="layui-col-md{$item.md}">
+          {notempty name="$item.title"}
+            <label class="layui-form-label" title="{$item.title}">{$item.title}</label>
+            <div class="layui-input-block">
+              <input class="layui-input js-search-date" id="search_items_{$item.name}" name="{$item.name}" placeholder="{$item.placeholder}" autocomplete="off" value="{:request()->param($item.name)}" data-configs="{$item.configs}">
+            </div>
+          {else/}
+            <input class="layui-input js-search-date" id="search_items_{$item.name}" name="{$item.name}" placeholder="{$item.placeholder}" autocomplete="off" value="{:request()->param($item.name)}" data-configs="{$item.configs}">
+          {/notempty}
+          </div>
+        {/case}              
+      {/switch}
+    {/volist}
+    <div class="layui-col-md1">
+      <button class="layui-btn">搜索</button>
+    </div>
+  </div>
+</form>
+{/notempty}

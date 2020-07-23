@@ -1,0 +1,11 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block">
+		 	<input id="{$item.name}" name="{$item.name}" value="{$item.value}" placeholder="{$item.placeholder|default='请输入'.$item.title}" min="{$item.min|default=''}" max="{$item.max|default=''}" data-prec="{$item.prec|default=''}" step="{$item.step|default=''}" class="layui-input layui-input-number js-numinput" lay-verify="{$item.verify|default=''}" {$item.attr|raw|default=''} autocomplete="off">
+		 	{notempty name="$item.tips"}
+		 		<div class="layui-word-aux">{$item.tips|raw}</div>
+		 	{/notempty}
+		</div>
+	</div>
+</div>

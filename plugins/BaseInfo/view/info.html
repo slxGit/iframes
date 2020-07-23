@@ -1,0 +1,70 @@
+{notempty name="config.system_info"}
+<div class="layui-col-md6">
+  <div class="layui-card">
+    <div class="layui-card-header">系统信息</div>
+    <div class="layui-card-body layui-text">
+      <table class="layui-table">
+        <colgroup>
+          <col width="45%">
+          <col>
+        </colgroup>
+        <tbody>
+          <tr>
+            <td>系统版本</td>
+            <td>KirinBDF v1.0.0</td>
+          </tr>
+          <tr>
+            <td>ThinkPHP版本</td>
+            <td>{$Think.VERSION}</td>
+          </tr>
+          <tr>
+            <td>PHP/MySQL版本</td>
+            <td>PHP{$Think.const.PHP_VERSION}/MySQL{:db()->query('select version() as version')[0]['version']}</td>
+          </tr>
+          <tr>
+            <td>上传限制</td>
+            <td>{:ini_get('upload_max_filesize')}</td>
+          </tr>
+          <tr>
+            <td>服务器环境</td>
+            <td>{$Request.server.SERVER_SOFTWARE}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{/notempty}
+{notempty name="config.product_team"}
+<div class="layui-col-md6">
+  <div class="layui-card">
+    <div class="layui-card-header">产品团队</div>
+    <div class="layui-card-body layui-text">
+      <table class="layui-table">
+        <colgroup>
+          <col width="45%">
+          <col>
+        </colgroup>
+        <tbody>
+          <tr>
+            <td>产品名称</td>
+            <td>KirinBDF（专注 · 极致 · 开放）</td>
+          </tr>
+          <tr>
+            <td>产品设计及研发团队</td>
+            <td>Victor、Aaron、Waican、Lemon</td>
+          </tr>
+          <tr>
+            <td>公司名称</td>
+            <td>徐州凯麟思信息技术有限公司</td>
+          </tr>
+          <tr>
+            <td>官方网站</td>
+            <td><a href="http://www.kylinsit.com/" target="_blank">www.kylinsit.com</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{/notempty}

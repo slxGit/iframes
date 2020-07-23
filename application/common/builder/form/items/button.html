@@ -1,0 +1,12 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block">
+			{eq name="item.ele_type" value="a"}
+				<a lay-href="{$item.btn_attr.href|default=''}" lay-text="{$item.title}" target="{$item.btn_attr.target|default='_self'}" id="{$item.name}" class="layui-btn {$item.btn_attr.class|default=''}" {$item.btn_attr.attr|raw|default=''}>{$item.btn_attr.title|default='自定义按钮'}</a>
+			{else/}
+				<button type="button" id="{$item.name}" class="layui-btn {$item.btn_attr.class|default=''}" {$item.btn_attr.attr|raw|default=''}>{$item.btn_attr.title|default='自定义按钮'}</button>
+			{/eq}
+		</div>
+	</div>
+</div>

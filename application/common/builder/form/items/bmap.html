@@ -1,0 +1,14 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item js-bmap" id="form_item_{$item.name}" data-level="{$item.level|default=12}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block">
+		 	<input type="text" id="{$item.name}_address" name="{$item.name}_address" value="{$item.address|default=''}" placeholder="请输入要搜索的地址" class="layui-input bmap-address" autocomplete="off">
+		 	{notempty name="$item.tips"}
+		 		<div class="layui-word-aux">{$item.tips|raw}</div>
+		 	{/notempty}
+		 	<input class="bmap-point" type="hidden" id="{$item.name}" name="{$item.name}" value="{$item.value|default=''}" autocomplete="off">
+		</div>
+		<div class="bmap" id="bmap-canvas-{$item.name}"></div>
+	</div>
+</div>
+<script type="text/javascript" src="//api.map.baidu.com/api?v=3.0&ak={$item.ak|default=config('bmap_ak')}"></script>

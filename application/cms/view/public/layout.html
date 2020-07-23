@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{block name="title"}{:config('web_site_title')}{/block}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="{:config('web_site_keywords')}">
+  <meta name="description" content="{:config('web_site_description')}">
+  <link rel="stylesheet" href="/static/cms/layui/css/layui.css">
+  <link rel="stylesheet" href="/static/cms/css/global.css">
+  <script src="/static/cms/layui/layui.js"></script>
+</head>
+<body>
+
+{block name="header"}{include file="public:header" /}{/block}
+
+{block name="main"}
+<div class="layui-container">
+  <div class="layui-row layui-col-space15">
+    {block name="content"}{/block}
+    {block name="right"}{include file="public:right" /}{/block}
+  </div>
+</div>
+{/block}
+
+{block name="footer"}{include file="public:footer" /}{/block}
+
+</body>
+</html>

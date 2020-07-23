@@ -1,0 +1,12 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block">
+		    <input type="text" id="{$item.name}" name="{$item.name}" value="{$item.value}" data-configs="{$item.configs|default='[]'}" placeholder="{$item.placeholder|default='请输入'.$item.title}" class="layui-input js-color-picker colorpicker-input" {$item.attr|raw|default=''} lay-verify="{$item.verify|default=''}" autocomplete="off">
+		    <div id="colorpicker_{$item.name}" class="colorpicker"></div>
+		    {notempty name="$item.tips"}
+		      <div class="layui-word-aux">{$item.tips|raw}</div>
+		    {/notempty}
+		</div>
+	</div>
+</div>

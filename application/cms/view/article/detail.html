@@ -1,0 +1,32 @@
+  {extend name="public:layout" /}
+
+{block name="content"}
+  <div class="layui-col-md8 content detail">
+    <div class="fly-panel detail-box">
+      <h1>{$article.title}</h1>
+      <div class="fly-detail-info">
+        <span class="layui-badge layui-bg-green">{$article.category.name}</span>
+        {if $article.is_top == 1}
+        <span class="layui-badge layui-bg-black">置顶</span>
+        {/if}
+        {if $article.is_recommend == 1}
+        <span class="layui-badge layui-bg-orange">推荐</span>
+        {/if}
+        <span class="fly-list-nums"> 
+          <i class="iconfont" title="点击量">&#xe60b;</i> {$article.clicks}
+        </span>
+      </div>
+      <div class="detail-about">
+        <div class="fly-detail-user">
+          <a href="javascript:void(0)">
+            <cite>{$article.author|default='佚名'}</cite>
+          </a>
+          <span style="float: right;">{$article.published_time}</span>
+        </div>
+      </div>
+      <div class="detail-body photos">
+        {$article.content|raw}
+      </div>
+    </div>
+  </div>
+{/block}

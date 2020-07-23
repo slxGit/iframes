@@ -1,0 +1,65 @@
+<html><head><meta charset='utf-8' /></head><body><table border="1">
+        <!-- caption元素可以生成表标题，其单元格列跨度为表格的列数 -->
+        <caption><h1>个人档案信息表</h1></caption>
+        <tbody><tr>
+            <!-- 可以使用rowspan和colspan来合并单元格 -->
+            <th>员工编号</th>
+            <th>员工姓名</th>
+            <th>员工性别</th>
+            <th>部门</th>
+            <th>职位</th>
+            <th>出生日期</th>
+            <th>进入公司时间</th>
+            <th>婚姻状况</th>
+            <th>政治面貌</th>
+            <th>民族</th>
+            <th>籍贯</th>
+            <th>学历</th>
+            <th>专业</th>
+            <th>首次签订日期</th>
+            <th>最后到期日期</th>
+            <th>学校</th>
+            <th>QQ</th>
+            <th>职称</th>
+            <th>地址</th>
+            <th>Email</th>
+            <th>电话</th>
+            <th>身份证号</th>
+            <th>基本工资</th>
+            <th>简历</th>
+            <th>备注</th>
+            <th>是否入职</th>
+            <th>是否转正</th>
+        </tr>
+       
+         <tr>
+            <td>1004</td>
+            <td>王琳</td>
+            <td>女</td>
+            <td>销售部</td>
+            <td>员工        </td>
+            <td>2015-05-05 00:00:00</td>
+            <td>2015-05-05 00:00:00</td>
+            <td>未婚      </td>
+             <td>优秀      </td>
+             <td>汉        </td>
+             <td>江苏      </td>
+             <td>大专      </td>
+             <td>计算机</td>
+             <td>2015-05-05 00:00:00</td>
+             <td>2015-05-05 00:00:00</td>
+             <td>北大青鸟</td>
+             <td>852741</td>
+             <td>无职称</td>
+             <td>江苏徐州</td>
+             <td>sina@qq.com</td>
+             <td>15974857457</td>
+             <td>342222199612221219</td>
+             <td>7000</td>
+             <td>ssss</td>
+             <td>优秀</td>
+                 <td>是</td>
+                            <td>是</td>
+             
+        </tr>
+    </tbody></table></body></html>

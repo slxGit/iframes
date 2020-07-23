@@ -1,0 +1,16 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block">
+			{notempty name="item.value"}
+	      	<div class="layui-upload-list gallery-list" id="gallery_list_{$item.name}">
+	  		{notempty name="item.value"}{volist name="item.value|explode=',', ###" id="vo"}<div class="file-item-thumbnail"><img class="layui-upload-img" src="{$vo|get_file_path|default='/static/admin/img/none.png'}"></div>{/volist}{/notempty}</div>
+	  		{else/}
+  			<div class="empty">暂无数据</div>
+			{/notempty}
+		</div>
+	</div>
+	{notempty name="$item.tips"}
+		<div class="word-aux">{$item.tips|raw}</div>
+	{/notempty}
+</div>

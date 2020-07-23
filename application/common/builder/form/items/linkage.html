@@ -1,0 +1,16 @@
+<div class="{$item.grid|default=''}">
+    <div class="layui-form-item" id="form_item_{$item.name}">
+        <label class="layui-form-label">{$item.title}</label>
+        <div class="layui-input-block">
+            <select class="js-select-linkage" lay-filter="{$item.name}" id="{$item.name}" name="{$item.name}" data-url="{$item.url}" data-param="{$item.param}" data-next-item_names="{$item.next_item_names}" {$item.attr|raw|default=''} lay-verify="{$item.verify|default=''}" autocomplete="off">
+                <option value="">{$item.placeholder|default='请选择一项'}</option>
+                {volist name="item.options" id="option"}
+                    <option value="{$key}" {if (string)$item.value == (string)$key}selected{/if}>{$option|raw}</option>
+                {/volist}
+            </select>
+            {notempty name="item.tips"}
+                <div class="layui-word-aux">{$item.tips|raw}</div>
+            {/notempty}
+        </div>
+    </div>
+</div>

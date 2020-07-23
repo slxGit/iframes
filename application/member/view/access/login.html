@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{:config('web_site_title')} 用户登录</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="__LAYUIADMIN__/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="__LAYUIADMIN__/style/admin.css" media="all">
+  <link rel="stylesheet" href="__LAYUIADMIN__/style/login.css" media="all">
+</head>
+<body>
+  <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+    <div class="layadmin-user-login-main">
+      <div class="layadmin-user-login-box layadmin-user-login-header">
+        <h2>{:config('web_site_title')}</h2>
+        <p>用户登录</p>
+      </div>
+      <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+        <div class="layui-form-item">
+          <label class="layadmin-user-login-icon layui-icon layui-icon-cellphone"></label>
+          <input type="text" name="mobile" id="mobile" lay-verify="phone" placeholder="手机号" class="layui-input">
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-row">
+            <div class="layui-col-xs7">
+              <label class="layadmin-user-login-icon layui-icon layui-icon-vercode"></label>
+              <input type="text" name="smscode" lay-verify="required" placeholder="验证码" class="layui-input">
+            </div>
+            <div class="layui-col-xs5">
+              <div style="margin-left: 10px;">
+                <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid" id="get_smscode">获取验证码</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="member-login-submit" id="login">登 录</button>
+        </div>
+        {if !empty($third_connect.qq_login_status) || !empty($third_connect.wechat_login_status)}
+        <div class="layui-trans layui-form-item layadmin-user-login-other">
+          <label>社交账号登录</label>
+          {notempty name="third_connect.qq_login_status"}
+          <a href="{:url('member/Access/connect',['type'=>'qq'])}"><i class="layui-icon layui-icon-login-qq"></i></a>
+          {/notempty}
+          {notempty name="third_connect.wechat_login_status"}
+          <a href="{:url('member/Access/connect',['type'=>'wechat'])}"><i class="layui-icon layui-icon-login-wechat"></i></a>
+          {/notempty}
+        </div>
+        {/if}
+      </div>
+    </div>
+    
+    <div class="layui-trans layadmin-user-login-footer">
+      <p>{:config('web_site_copyright')}</p>
+    </div>
+    
+  </div>
+
+  <script src="__LAYUIADMIN__/layui/layui.js"></script>  
+  <script>
+  layui.config({
+    base: '__LAYUIADMIN__/'
+  }).extend({
+    index: 'lib/index'
+  }).use(['index', 'user'], function(){
+    var $ = layui.$,
+    admin = layui.admin,
+    form = layui.form;
+
+    form.render();
+
+    form.on('submit(member-login-submit)', function(data){
+      layer.msg('<i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i> 正在登录...', {
+        shade: 0.1, 
+        time: 0
+      });
+      $.ajax({
+        type: 'POST',
+        url: "{:url('member/Access/smsLoginPost')}",
+        data: data.field,
+        success: function(res){
+          layer.closeAll();
+          if(res.code == 1){
+            location.href = res.url;
+          }else{
+            layer.msg(res.msg, {icon: 2});
+          }
+        },
+        error: function () {
+          error('数据异常，操作失败！');
+        }
+      });
+    });
+
+    // 发送短信验证码
+    admin.sendAuthCode({
+      elem: '#get_smscode',
+      elemPhone: '#mobile'
+    });
+
+    $(document).on("keydown",function (event) {
+      var e = event || window.event ||arguments.callee.caller.arguments[0];
+      if(e && e.keyCode==13){
+        $("#login").trigger("click");
+      }
+    });
+
+  });
+  </script>
+</body>
+</html>

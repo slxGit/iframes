@@ -1,0 +1,20 @@
+<div class="{$item.grid|default=''}">
+    <div class="layui-form-item" id="form_item_{$item.name}">
+        <label class="layui-form-label">{$item.title}</label>
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn layui-btn-primary upload-file" id="picker_{$item.name}">{$item.placeholder|default='上传图片'}</button>
+            {notempty name="$item.tips"}
+                <div class="layui-word-aux">{$item.tips|raw}</div>
+            {/notempty}
+            <div class="layui-upload-list" id="upload_list_{$item.name}">
+            {notempty name="item.value"}
+                <div class="file-item-thumbnail">
+                    <img class="layui-upload-img" src="{:get_file_path($item.value)}">
+                    <i class="layui-icon layui-icon-close-fill remove-picture"></i>
+                </div>
+            {/notempty}
+            </div>
+            <input type="hidden" class="js-upload-image" id="{$item.name}" name="{$item.name}" data-multiple="false" data-size="{$item.size|default=0}" data-exts="{$item.exts|default=''}" data-url="{$item.url|default=url('system/annex/upload',['dir'=>'images'])}" data-thumb="{$item.thumb|default=''}" value="{$item.value|default=''}" autocomplete="off">
+        </div>
+    </div>
+</div>

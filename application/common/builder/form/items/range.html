@@ -1,0 +1,12 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block">
+			<div id="slider_{$item.name}" class="slider"></div>
+		 	<input type="hidden" id="{$item.name}" name="{$item.name}" value="{$item.value}" data-configs="{$item.configs|default='[]'}" class="js-slider" autocomplete="off">
+		 	{notempty name="$item.tips"}
+		 		<div class="layui-word-aux">{$item.tips|raw}</div>
+		 	{/notempty}
+		</div>
+	</div>
+</div>

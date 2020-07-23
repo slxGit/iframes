@@ -1,0 +1,13 @@
+<div class="{$item.grid|default=''}">
+	<div class="layui-form-item" id="form_item_{$item.name}">
+		<label class="layui-form-label">{$item.title}</label>
+		<div class="layui-input-block">
+			{volist name="item.options" id="option"}
+	  			<input type="checkbox" id="{$item.name}[{$key}]" name="{$item.name}[]" value="{$key}" title="{$option}" {in name="key" value="$item.value|default=''"}checked{/in} {$item.attr|raw|default=''} autocomplete="off">
+	  		{/volist}
+			{notempty name="$item.tips"}
+				<div class="layui-word-aux">{$item.tips|raw}</div>
+			{/notempty}
+		</div>
+	</div>
+</div>

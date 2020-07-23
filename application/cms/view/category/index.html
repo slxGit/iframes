@@ -1,0 +1,52 @@
+{extend name="public:layout" /}
+
+{block name="content"}
+  <div class="layui-col-md8">
+    <div class="fly-panel" style="margin-bottom: 0;">
+      <div class="fly-panel-title fly-filter">
+        <a href="{$complex_url}" {if $nav_status eq 1}class="layui-this"{/if}>综合</a>
+        <span class="fly-mid"></span>
+        <a href="{$recommend_url}" {if $nav_status eq 2}class="layui-this"{/if}>推荐</a>
+      </div>
+      {empty name="article_list"}
+        <div class="fly-none">暂无数据</div>
+      {else/}
+      <ul class="fly-list">
+        {volist name="article_list" id="article"} 
+        <li>
+          <a href="{:url('cms/article/detail',['id'=>$article.id])}" class="fly-avatar">
+            <img src="{$article.thumbnail|get_thumb_path=###,'100x100'|default='/static/admin/img/default.png'}">
+          </a>
+          <h2>
+            <a class="layui-badge">{$article.category.name}</a>
+            <a href="{:url('cms/article/detail',['id'=>$article.id])}">{$article.title}</a>
+          </h2>
+          <div class="fly-list-info">
+            <a href="javascript:void(0)" link>
+              <cite>{$article.author|default='佚名'}</cite>
+            </a>
+            <span>{$article.published_time}</span>
+            <span class="fly-list-nums">
+              <i class="iconfont icon-liulanyanjing" title="点击量"></i> {$article.clicks}
+            </span>
+          </div>
+          <div class="fly-list-badge">
+            {if $article.is_top eq 1}
+              <span class="layui-badge layui-bg-black">置顶</span>
+            {/if}
+            {if $article.is_recommend eq 1}
+              <span class="layui-badge layui-bg-orange">推荐</span>
+            {/if}
+          </div>
+        </li>
+        {/volist}
+      </ul>
+      {/empty}
+  
+      <div style="padding-left: 15px">
+        {$article_list->render()|raw}
+      </div>
+
+    </div>
+  </div>
+{/block}
